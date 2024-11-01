@@ -42,7 +42,7 @@ class DiscreteHMM:
 
         for t in range(1, self.n_window):
             for j in range(self.n_states):
-                fwd[t, j] = np.sum(fwd[t - 1] * self.transmat_[:, j]) * self.transmat_[j, X[t]]
+                fwd[t, j] = np.sum(fwd[t - 1] * self.transmat_[:, j]) * self.transmat_[j, X[t]]  # t时刻观测到序列并处于状态j的概率
         return fwd
 
     def backward(self, X):

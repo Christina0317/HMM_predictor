@@ -7,6 +7,9 @@ import pickle
 from tqdm import tqdm
 from hmm_model import viterbi_method, comparison_method
 from config import *
+import random
+random.seed(42)
+np.random.seed(42)
 
 
 def implement_hmm(data, n_states, n_symbols, n_iter, n_window, em_threshold, predict_method, feature_name):

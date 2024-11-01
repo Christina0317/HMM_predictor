@@ -102,24 +102,6 @@ def comparison_method(data, n_states, n_symbols, n_iter, n_window, em_threshold,
     # 初始化hmm模型
     hmm_model = GaussianHMM(n_states, n_symbols, n_iter, n_window, em_threshold)
 
-    # next_value_seq = [np.nan] * (n_window)
-    #
-    # # 添加外层进度条
-    # pbar = tqdm(range(n_window, len(data.index.values)), desc="Processing windows")
-    #
-    # for i in pbar:
-    #     X = data.iloc[i - n_window: i].values
-    #     if i < n_window + 20:
-    #         hmm_model.reset_parameters(X)
-    #         transmat, mean, var = hmm_model.em_algorithm(X)
-    #         next_value = hmm_model.viterbi_predict(X)
-    #         next_value_seq.append(next_value)
-    #     else:
-    #         hmm_model.reset_parameters(X)
-    #         transmat, mean, var = hmm_model.em_algorithm(X)
-    #         o_t = hmm_model.comparison_predict(X, data.iloc[max(0, i-300):i - 1].values, 1e-3)
-    #         next_value_seq.append(o_t)
-
     tasks = [(i, data.iloc[i - n_window: i].values, hmm_model, n_window, data) for i in range(n_window, len(data.index.values))]
 
     # Using a pool of workers to process data windows in parallel
